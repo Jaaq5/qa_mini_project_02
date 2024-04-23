@@ -1,11 +1,13 @@
 import React from "react";
 
+// Define the User interface
 interface User {
   id: number;
   email: string;
   password: string;
 }
 
+// Define the UsersTableProps interface
 interface UsersTableProps {
   users: User[];
 }

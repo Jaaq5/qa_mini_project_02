@@ -1,3 +1,4 @@
+// Local postgres database connection
 import { Pool } from "pg";
 
 const pool = new Pool({

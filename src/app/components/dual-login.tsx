@@ -1,8 +1,6 @@
 // Client rendering, useState use it
 "use client";
-//import { pool } from "../db/db_connection.js";
-// Local states for components
-//import { useState } from "react";
+
 import React, { useState } from "react";
 
 // Define the interface for the login form
@@ -27,41 +25,38 @@ const SqlInjectionLogin: React.FC<LoginForm> = ({ id, title }) => {
     setSubmittedPassword(password);
 
     try {
-      // Enviar los datos de inicio de sesión al backend
+      // Send a POST request to the server with the email and password
       const response = await fetch("/api", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: email, // Suponiendo que 'email' y 'password' son las variables donde almacenas el correo electrónico y la contraseña del usuario
-          password: password,
           id: id,
+          email: email,
+          password: password,
         }),
       });
 
-      // Verificar si la solicitud fue exitosa (código de estado 200)
+      // Verify the response status
       if (response.ok) {
         const data = await response.json();
-        //console.log("Hola");
-        // Aquí puedes manejar la respuesta exitosa, por ejemplo, actualizar el estado del componente con los datos del usuario
+        // Here you can handle the response data from the server
       } else {
-        // Si la solicitud no fue exitosa, manejar el error
+        // Response failed, handle the error
         const errorData = await response.json();
         console.error("Error:", errorData);
-        // Aquí puedes manejar el error, por ejemplo, mostrar un mensaje de error al usuario
       }
     } catch (error) {
-      // Si ocurre un error durante la solicitud, manejarlo aquí
+      // Handle error during the request
       console.error("Error:", error);
-      // Aquí puedes manejar el error, por ejemplo, mostrar un mensaje de error al usuario
     }
   };
 
   // Handle the SQL injection button
   const SQLInjectionButton = () => {
     setEmail("admin@email.com");
-    setPassword("Contrasena' or '1'='1");
+    setPassword("contrasena' or '1'='1");
   };
 
   return (
@@ -79,7 +74,7 @@ const SqlInjectionLogin: React.FC<LoginForm> = ({ id, title }) => {
               type="email"
               autoComplete="email"
               required
-              maxLength={50} // Limitar la entrada a 50 caracteres
+              maxLength={50} // Max user input length
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
               placeholder="micorreo@email.com"
               value={email}
@@ -96,7 +91,7 @@ const SqlInjectionLogin: React.FC<LoginForm> = ({ id, title }) => {
               type="password"
               autoComplete="current-password"
               required
-              maxLength={50} // Limitar la entrada a 50 caracteres
+              maxLength={50} // Max user input length
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
               placeholder="contraseña"
               value={password}
@@ -125,7 +120,8 @@ const SqlInjectionLogin: React.FC<LoginForm> = ({ id, title }) => {
           Inyectar sql 👹
         </button>
       </div>
-      {/* Show output info */}
+
+      {/* Show sql query */}
       {submittedEmail && submittedPassword && (
         <div className="mt-4">
           <p>Consulta sql ingresada:</p>

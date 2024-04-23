@@ -1,10 +1,20 @@
 import React from "react";
+
+// React components
 import { DualLogin } from "./components/dual-login";
-import localGetUsers from "./lib/local-get-users";
 import UsersTable from "./components/users-table";
 
+// Db calls
+// Uncomment for local testing
+//import localGetUsers from "./lib/local-get-users";
+
+import neonGetUsers from "./lib/neon-get-users";
+
 async function Page() {
-  const users = await localGetUsers();
+  // Uncomment for local testing
+  //const users = await localGetUsers();
+
+  const users = await neonGetUsers();
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">

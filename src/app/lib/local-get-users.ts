@@ -1,5 +1,6 @@
 import pool from "./local-db-connection";
 
+// Get all users from the database
 async function localGetUsers() {
   const client = await pool.connect();
   try {
