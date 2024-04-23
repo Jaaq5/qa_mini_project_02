@@ -1,9 +1,8 @@
 //import { NextResponse } from "next/server";
 
+import pool from "../lib/neon-db-connection";
 // Uncomment for local db connection
 //import pool from "../lib/local-db-connection";
-
-import pool from "../lib/neon-db-connection";
 
 // Unsafe query function, here you can insert sql injections
 async function unsafeQuery(email: string, password: string) {
@@ -18,17 +17,17 @@ async function unsafeQuery(email: string, password: string) {
   }
 }
 
-// Safe query function, here you cant insert sql inejctions
+// Safe query function, here you cant insert sql injections
 async function safeQuery(email: string, password: string) {
   try {
     const queryResult = await pool.query(
       "SELECT * FROM users WHERE email = $1 AND password = $2",
       [email, password]
     );
-    return queryResult; // Retorna los resultados de la consulta
+    return queryResult;
   } catch (error) {
-    console.error("Error en la consulta:", error);
-    throw error; // Lanza el error para manejarlo en el lugar donde se llame a la función
+    console.error("safeQuery error:", error);
+    throw error;
   }
 }
 

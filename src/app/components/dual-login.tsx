@@ -37,15 +37,22 @@ const SqlInjectionLogin: React.FC<LoginForm> = ({ id, title }) => {
           password: password,
         }),
       });
-
       // Verify the response status
       if (response.ok) {
         const data = await response.json();
-        // Here you can handle the response data from the server
+
+        // Handle the response data from the server
+        const message = data.message;
+
+        // Verify response message
+        if (message === "User found") {
+          alert("!Hola, inicio de sesión exitoso!");
+        }
       } else {
         // Response failed, handle the error
         const errorData = await response.json();
         console.error("Error:", errorData);
+        alert("Usuario no encontrado, intente de nuevo!");
       }
     } catch (error) {
       // Handle error during the request
@@ -113,7 +120,7 @@ const SqlInjectionLogin: React.FC<LoginForm> = ({ id, title }) => {
       {/* SQL injection button*/}
       <div className="mt-4">
         <button
-          title="email: admin@email.com / contraseña: Contrasena' or '1'='1 "
+          title="email: admin@email.com / contraseña: contrasena' or '1'='1 "
           onClick={SQLInjectionButton}
           className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
         >
