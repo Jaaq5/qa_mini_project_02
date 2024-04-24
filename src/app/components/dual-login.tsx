@@ -117,10 +117,10 @@ const SqlInjectionLogin: React.FC<LoginForm> = ({ id, title }) => {
         </div>
       </form>
 
-      {/* SQL injection button*/}
+      {/* Sql injection button*/}
       <div className="mt-4">
         <button
-          title="email: admin@email.com / contraseña: contrasena' or '1'='1 "
+          title="admin@email.com / contrasena' or '1'='1"
           onClick={SQLInjectionButton}
           className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
         >

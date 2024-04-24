@@ -16,15 +16,24 @@ async function Page() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      {/* Agrega el enlace dentro del contenedor de formularios */}
       <div className="mt-5 mb-1">
+        {/* Github link */}
         <a
           href="https://github.com/Jaaq5/qa_mini_project_02"
           target="_blank"
           rel="noopener noreferrer"
           className="text-blue-500 hover:text-blue-700"
         >
-          GitHub repo
+          Repo
+        </a>{" "}
+        {/* Documentation link */}
+        <a
+          href="./doc"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 hover:text-blue-700"
+        >
+          Doc
         </a>
       </div>
 

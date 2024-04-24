@@ -15,8 +15,10 @@ INSERT INTO users (email, password) VALUES
 -- Valid query
 SELECT * FROM users WHERE email = 'juan@gmail.com' AND password = '12345';
 
--- SQL injection example
--- Contrasena' or '1'='1
-SELECT * FROM users WHERE email = 'usuario@gmail.com' AND password = 'Contrasena' or '1'='1';
--- admin@gmail.com' or '2'='2'--
-SELECT * FROM users WHERE email = 'admin@gmail.com' or '2'='2'-- AND password = '';
+-- Sql injection example
+-- texto' or '1'='1
+SELECT * FROM users WHERE email = 'usuario@gmail.com' AND password = 'texto' or '1'='1';
+-- texto' or 1=1--
+SELECT * FROM users WHERE email = 'usuario@outlook.com' AND password = 'texto' or 1=1--;
+-- texto' or 1=1 or ''='
+SELECT * FROM users WHERE email = 'usuario@yahoo.com' AND password = 'texto' or 1=1 or ''='';

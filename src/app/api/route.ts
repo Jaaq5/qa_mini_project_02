@@ -17,9 +17,30 @@ async function unsafeQuery(email: string, password: string) {
   }
 }
 
+function isValidEmail(email: string): boolean {
+  // Check if input is in format any@any.any
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+function isValidPassword(password: string): boolean {
+  // Check password is at least 5 characters long
+  return password.length >= 5;
+}
+
 // Safe query function, here you cant insert sql injections
 async function safeQuery(email: string, password: string) {
+  // Input sanitization
+  if (!isValidEmail(email)) {
+    throw new Error("Invalid email format.");
+  }
+  // Input sanitization
+  if (!isValidPassword(password)) {
+    throw new Error("Invalid password length.");
+  }
+
   try {
+    // Using prepared statements with $1 and $2
     const queryResult = await pool.query(
       "SELECT * FROM users WHERE email = $1 AND password = $2",
       [email, password]
